@@ -41,8 +41,10 @@ class Parser
 
     public function parseResult(String $type)
     {
-        return array_values(array_filter($this->serviceTypes, function($types) use ($type) {
+        $result = array_values(array_filter($this->serviceTypes, function($types) use ($type) {
             return $types['DescripcionServicio'] == $type;
-        }))[0];
+        }));
+
+        return $result ? $result[0] : null;
     }
 }
