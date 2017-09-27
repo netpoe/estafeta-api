@@ -44,28 +44,28 @@ class Cotizador
         return $this;
     }
 
-    public function setWeight(Int $weight)
+    public function setWeight(String $weight)
     {
         $this->weight = $weight;
 
         return $this;
     }
 
-    public function setLength(Int $length)
+    public function setLength(String $length)
     {
         $this->length = $length;
 
         return $this;
     }
 
-    public function setHeight(Int $height)
+    public function setHeight(String $height)
     {
         $this->height = $height;
 
         return $this;
     }
 
-    public function setWidth(Int $width)
+    public function setWidth(String $width)
     {
         $this->width = $width;
 
@@ -79,9 +79,9 @@ class Cotizador
         return $this;
     }
 
-    public function getQuotation(): Array
+    public function getQuotation(): Parser
     {
-        return $this->quotation;
+        return new Parser($this->quotation);
     }
 
     public function getData(): Array

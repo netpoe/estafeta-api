@@ -23,7 +23,7 @@ class CotizadorTest extends TestCase
 
         $quotation = $cotizador->getQuotation();
 
-        $this->assertArrayHasKey('TipoServicio', $quotation);
+        $this->assertArrayHasKey('TipoServicio', $quotation->quotation);
     }
 
     public function testQuotationWithZipCodesStartingWithZero()
@@ -32,8 +32,8 @@ class CotizadorTest extends TestCase
 
         $cotizador->setType()
                 ->isPackage()
-                ->setOriginZipCode(03200)
-                ->setDestinyZipCode(06600)
+                ->setOriginZipCode('03200')
+                ->setDestinyZipCode('06600')
                 ->setWeight(28)
                 ->setLength(34)
                 ->setHeight(56)
@@ -43,6 +43,48 @@ class CotizadorTest extends TestCase
 
         $quotation = $cotizador->getQuotation();
 
-        $this->assertArrayHasKey('TipoServicio', $quotation);
+        $this->assertArrayHasKey('TipoServicio', $quotation->quotation);
+    }
+
+    public function testGetsQuotationParser()
+    {
+        $cotizador = new Cotizador;
+
+        $cotizador->setType()
+                ->isPackage()
+                ->setOriginZipCode('03200')
+                ->setDestinyZipCode('06600')
+                ->setWeight(28)
+                ->setLength(34)
+                ->setHeight(56)
+                ->setWidth(25);
+
+        $cotizador->quote();
+
+        $quotation = $cotizador->getQuotation();
+
+        $this->assertInstanceOf(Parser::class, $quotation);
+    }
+
+    public function testGetsServiceTypeInstance()
+    {
+        $cotizador = new Cotizador;
+
+        $cotizador->setType()
+                ->isPackage()
+                ->setOriginZipCode('03200')
+                ->setDestinyZipCode('06600')
+                ->setWeight(28)
+                ->setLength(34)
+                ->setHeight(56)
+                ->setWidth(25);
+
+        $cotizador->quote();
+
+        $quotation = $cotizador->getQuotation();
+
+        $groundShippingCost = $quotation->getGroundShippingCost();
+
+        $this->assertInstanceOf(ServiceType::class, $groundShippingCost);
     }
 }
