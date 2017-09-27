@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Netpoe\EstafetaAPI;
 
@@ -26,18 +26,18 @@ class Cotizador
     public function isPackage(String $isPackage = 'true')
     {
         $this->isPackage = $isPackage;
-        
+
         return $this;
     }
 
-    public function setOriginZipCode(Int $originZipCode)
+    public function setOriginZipCode(String $originZipCode)
     {
         $this->originZipCode = $originZipCode;
 
         return $this;
     }
 
-    public function setDestinyZipCode(Int $destinyZipCode)
+    public function setDestinyZipCode(String $destinyZipCode)
     {
         $this->destinyZipCode = $destinyZipCode;
 
